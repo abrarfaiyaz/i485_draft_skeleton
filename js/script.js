@@ -46,6 +46,68 @@
 //         alert(`An error occurred: ${error.message}`);
 //     }
 // });
+// document.getElementById('uploadForm').addEventListener('submit', async function(event) {
+//     event.preventDefault(); // Prevent the form from submitting the default way
+
+//     const pdfFiles = document.getElementById('pdfFiles').files;
+//     const texFileUrl = 'https://raw.githubusercontent.com/abrarfaiyaz/i485_draft_skeleton/main/files/main.tex';
+
+//     if (pdfFiles.length === 0) {
+//         alert('Please select at least one PDF file.');
+//         return;
+//     }
+
+//     try {
+//         // Upload the PDF files to File.io or another service
+//         const fileUrls = [];
+//         for (const file of pdfFiles) {
+//             const formData = new FormData();
+//             formData.append('file', file);
+
+//             const response = await fetch('https://file.io', {
+//                 method: 'POST',
+//                 body: formData
+//             });
+
+//             if (!response.ok) {
+//                 throw new Error('Failed to upload file.');
+//             }
+
+//             const data = await response.json();
+//             fileUrls.push(data.link);
+//         }
+
+//         // Create a form dynamically to open the files in Overleaf
+//         const overleafForm = document.createElement('form');
+//         overleafForm.action = 'https://www.overleaf.com/docs';
+//         overleafForm.method = 'post';
+//         overleafForm.target = '_blank';
+
+//         // Add the TeX file URL to the form
+//         const texInput = document.createElement('input');
+//         texInput.type = 'hidden';
+//         texInput.name = 'snip_uri';
+//         texInput.value = texFileUrl;
+//         overleafForm.appendChild(texInput);
+
+//         // Add each PDF file URL to the form
+//         fileUrls.forEach((url, index) => {
+//             const pdfInput = document.createElement('input');
+//             pdfInput.type = 'hidden';
+//             pdfInput.name = `file${index + 1}`;
+//             pdfInput.value = url;
+//             overleafForm.appendChild(pdfInput);
+//         });
+
+//         document.body.appendChild(overleafForm);
+//         overleafForm.submit();
+//         document.body.removeChild(overleafForm); // Clean up
+//     } catch (error) {
+//         alert(`An error occurred: ${error.message}`);
+//     }
+// });
+
+
 document.getElementById('uploadForm').addEventListener('submit', async function(event) {
     event.preventDefault(); // Prevent the form from submitting the default way
 
@@ -77,31 +139,18 @@ document.getElementById('uploadForm').addEventListener('submit', async function(
             fileUrls.push(data.link);
         }
 
-        // Create a form dynamically to open the files in Overleaf
-        const overleafForm = document.createElement('form');
-        overleafForm.action = 'https://www.overleaf.com/docs';
-        overleafForm.method = 'post';
-        overleafForm.target = '_blank';
+        // Prepare the snip_uri and snip_name arrays for Overleaf
+        const snipUris = [texFileUrl, ...fileUrls]; // Include main.tex and all PDF URLs
+        const snipNames = ['main.tex', ...pdfFiles.map(file => file.name)]; // Specify names for each file
 
-        // Add the TeX file URL to the form
-        const texInput = document.createElement('input');
-        texInput.type = 'hidden';
-        texInput.name = 'snip_uri';
-        texInput.value = texFileUrl;
-        overleafForm.appendChild(texInput);
+        // Construct the URL for opening in Overleaf
+        const overleafUrl = 'https://www.overleaf.com/docs?' +
+                            snipUris.map(uri => `snip_uri[]=${encodeURIComponent(uri)}`).join('&') +
+                            '&' +
+                            snipNames.map(name => `snip_name[]=${encodeURIComponent(name)}`).join('&');
 
-        // Add each PDF file URL to the form
-        fileUrls.forEach((url, index) => {
-            const pdfInput = document.createElement('input');
-            pdfInput.type = 'hidden';
-            pdfInput.name = `file${index + 1}`;
-            pdfInput.value = url;
-            overleafForm.appendChild(pdfInput);
-        });
-
-        document.body.appendChild(overleafForm);
-        overleafForm.submit();
-        document.body.removeChild(overleafForm); // Clean up
+        // Open Overleaf in a new tab/window
+        window.open(overleafUrl, '_blank');
     } catch (error) {
         alert(`An error occurred: ${error.message}`);
     }
