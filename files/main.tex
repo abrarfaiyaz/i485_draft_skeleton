@@ -1,3 +1,11 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Welcome to Overleaf --- just edit your LaTeX on the left,
+% and we'll compile it for you on the right. If you open the
+% 'Share' menu, you can invite other users to edit at the same
+% time. See www.overleaf.com/learn for more info. Enjoy!
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass{letter}
 \usepackage[utf8]{inputenc}
 \usepackage{geometry}
@@ -12,7 +20,11 @@
 %   \ifnum\AM@page=#2\relax\index{#1}\fi
 % }
 
-\newcommand{\Anum}{A-246358562}
+
+
+
+\input{variables.tex}
+
 \newcounter{labelcounter}
 \newcommand{\centerlabel}[1]{
 \stepcounter{labelcounter}
@@ -36,25 +48,22 @@
 % }
 \date{July 01, 2024}
 
-\signature{Abrar Faiyaz\\615 University Park,\\Rochester, NY- 14620}
-\address{Abrar Faiyaz \\ 615 University Park,\\Rochester, NY- 14620}
+\signature{\pApplicant \\615 University Park,\\Rochester, NY- 14620}
+\address{\pApplicant \\ 615 University Park,\\Rochester, NY- 14620}
 
 \begin{document}
-
-\begin{letter}{U.S. Department of Homeland Security (USCIS)\\
-Attn: NFB\\
-PO Box 4115\\
-Carol Stream, IL 60197-4115
+% \include{variables}
+\begin{letter}{\USCISaddress
 
 \vspace{0.5cm}
 
 \textbf{RE: Application for Adjustment of Status (Based on Approved I-140 NIW EB-2 Petition)
-for \textit{Abrar Faiyaz} (\Anum) \& \textit{Sayka Sultana Mim} (Spouse) as nationals of Bangladesh }
-% Application of Employment Authorization for \textit{Sayka Sultana Mim}
+for \textit{\pApplicant} (\Anum) \& \textit{\dApplicant} (Spouse) as nationals of Bangladesh }
+% Application of Employment Authorization for \textit{\dApplicant}
 \vspace{0.5cm}
 
-\textbf{Principal Applicant:} Abrar Faiyaz ({Type:} \textbf{I-485})\\
-\textbf{Derivative Applicant (Spouse):} Sayka Sultana Mim  ({Type:} \textbf{I-485 \& I-765})\\
+\textbf{Principal Applicant:} \pApplicant  ({Type:} \textbf{I-485})\\
+\textbf{Derivative Applicant (Spouse):} \dApplicant  ({Type:} \textbf{I-485 \& I-765})\\
 \textbf{Nature of Submission:} Original Submission \\
 
 }
@@ -67,7 +76,7 @@ for \textit{Abrar Faiyaz} (\Anum) \& \textit{Sayka Sultana Mim} (Spouse) as nati
 \opening{Dear Immigration Officer,}
 
 
-I, \textbf{Abrar Faiyaz}, along with  my wife \textbf{Sayka Sultana Mim} are submitting our application to Register Permanent Residence or Adjust Status (I-485) based on my approved NIW Employment-Based I-140, Immigration Petition for Alien Worker (\textbf{Priority Date 02/15/2023} and \textbf{Receipt Number LIN2390114182}).\textbf{Sayka Sultana Mim} is also applying for \textbf{Employment Authorization (Form I-765)} together with her adjustment of status application.
+I, \textbf{\pApplicant}, along with  my wife \textbf{\dApplicant} are submitting our application to Register Permanent Residence or Adjust Status (I-485) based on my approved NIW Employment-Based I-140, Immigration Petition for Alien Worker (\textbf{Priority Date \priorityDate} and \textbf{Receipt Number \ReceiptNumber}).\textbf{\dApplicant} is also applying for \textbf{Employment Authorization (Form I-765)} together with her adjustment of status application.
 
 % Please Note: I Self-Petitioned My Approved I-140 NIW Petition - Therefore, I-485 Supplement J Is Not Required. Supplement-J instruction is added to the supporting documents that shows my petition do not require filing Supplement-J form.
 
@@ -96,7 +105,7 @@ The index of exhibits will guide you to principal and derivative applicant's lis
 % \textit{Sincerely,}\\
 % \vspace{1.5cm}
 
-% \textbf{Abrar Faiyaz, PhD} \\
+% \textbf{\pApplicant, PhD} \\
 % \textit{PostDoctoral Assoc. at Neurology,} \\
 % University of Rochester (School of Medicine \& Dentistry) \\
 % Phone: 585-355 9186 \\
@@ -104,7 +113,7 @@ The index of exhibits will guide you to principal and derivative applicant's lis
 
 % \vspace{1.5cm}
 
-% \textbf{Sayka Sultana Mim} \\
+% \textbf{\dApplicant} \\
 % Phone: 585-202 9934 \\
 % E-mail: sayka.s.mim@gmail.com}
 \vspace{1.5cm}
@@ -112,18 +121,18 @@ The index of exhibits will guide you to principal and derivative applicant's lis
 
 \begin{minipage}[t]{0.5\textwidth}
 \vspace{1.5cm}
-\textbf{Abrar Faiyaz, Ph.D.} \\
-\textit{PostDoctoral Assoc. at Neurology,} \\
-University of Rochester \\
-Phone: 585-355 9186 \\
-e-mail: afaiyaz.tasin@outlook.com \\
+\textbf{\pApplicant,} \\
+\textit{\pAddress} \\
+\pCity \\
+Phone: \pPhone \\
+e-mail: \pEmail \\
 \end{minipage}%
 \begin{minipage}[t]{0.5\textwidth}
 \vspace{1.5cm}
 \begin{flushright}
-\textbf{Sayka Sultana Mim} \\
-Phone: 585-202 9934 \\
-e-mail: sayka.s.mim@gmail.com
+\textbf{\dApplicant} \\
+Phone: \dPhone \\
+e-mail: \dEmail
 \end{flushright}
 \end{minipage}
 
@@ -142,20 +151,20 @@ e-mail: sayka.s.mim@gmail.com
 \begin{minipage}[t]{0.5\textwidth}
 
 \vspace{2cm}
-\textbf{Abrar Faiyaz, Ph.D.} \\
-615 University Park,\\
-Rochester, NY.- 14620\\
-Phone: 585-355 9186 \\
-afaiyaz.tasin@outlook.com \\
+\textbf{\pApplicant} \\
+\pAddress\\
+\pCity\\
+Phone: \pPhone \\
+\pEmail \\
 \end{minipage}%
 \begin{minipage}[t]{0.5\textwidth}
 \vspace{2cm}
 \begin{flushright}
-\textbf{Sayka Sultana Mim} \\
-615 University Park,\\
-Rochester, NY.- 14620\\
-Phone: 585-202 9934 \\
-sayka.s.mim@gmail.com\\
+\textbf{\dApplicant} \\
+\dAddress\\
+\dCity\\
+Phone: \dPhone \\
+\dEmail\\
 \end{flushright}
 \end{minipage}
 
