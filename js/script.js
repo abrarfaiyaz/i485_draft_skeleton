@@ -50,7 +50,7 @@ document.getElementById('uploadForm').addEventListener('submit', async function(
     event.preventDefault(); // Prevent the form from submitting the default way
 
     const pdfFiles = document.getElementById('pdfFiles').files;
-    const texFileUrl = window.location.origin + '/files/main.tex'; // Directly reference the local main.tex file
+    const texFileUrl = 'https://raw.githubusercontent.com/abrarfaiyaz/i485_draft_skeleton/main/files/main.tex';
 
     if (pdfFiles.length === 0) {
         alert('Please select at least one PDF file.');
@@ -58,7 +58,7 @@ document.getElementById('uploadForm').addEventListener('submit', async function(
     }
 
     try {
-        // Upload the PDF files to File.io
+        // Upload the PDF files to File.io or another service
         const fileUrls = [];
         for (const file of pdfFiles) {
             const formData = new FormData();
@@ -106,4 +106,5 @@ document.getElementById('uploadForm').addEventListener('submit', async function(
         alert(`An error occurred: ${error.message}`);
     }
 });
+
 
