@@ -61,4 +61,38 @@ document.getElementById('uploadForm').addEventListener('submit', async function(
 % Details Regarding Recipient's Address
 \\newcommand{\\USCISATTN}{${USCISATTN}}
 \\newcommand{\\USCISPOBOX}{${USCISPOBOX}}
-\\newcommand{\\USCISCITY}{${USCISCITY
+\\newcommand{\\USCISCITY}{${USCISCITY}}
+\\newcommand{\\USCISSTATE}{${USCISSTATE}}
+\\newcommand{\\USCISzip}{${USCISzip}}
+\\newcommand{\\USCISaddress}{U.S. Department of Homeland Security (USCIS)\\\\Attn: \\USCISATTN\\\\PO Box \\USCISPOBOX\\\\\\USCISCITY, \\USCISSTATE - \\USCISzip}
+        `;
+
+        const variablesFile = new Blob([variablesTex], { type: 'text/plain' });
+
+        // Prepare FormData for the files to be uploaded
+        const formData = new FormData();
+        formData.append('snip_name[]', 'variables.tex');
+        formData.append('snip_uri[]', URL.createObjectURL(variablesFile));
+
+        texFiles.forEach((fileUrl, index) => {
+            const fileName = fileUrl.split('/').pop();
+            formData.append('snip_name[]', fileName);
+            formData.append('snip_uri[]', fileUrl);
+        });
+
+        // Open files in Overleaf
+        const response = await fetch('https://www.overleaf.com/docs', {
+            method: 'POST',
+            body: formData,
+        });
+
+        if (response.ok) {
+            window.open(response.url, '_blank');
+        } else {
+            alert('Failed to open in Overleaf. Please try again.');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred. Please try again.');
+    }
+});
