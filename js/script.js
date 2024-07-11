@@ -50,7 +50,7 @@ document.getElementById('uploadForm').addEventListener('submit', async function(
     event.preventDefault(); // Prevent the form from submitting the default way
 
     const pdfFiles = document.getElementById('pdfFiles').files;
-    const texFileUrl = window.location.origin + '/files/main.tex';
+    const texFileUrl = window.location.origin + '/files/main.tex'; // Directly reference the local main.tex file
 
     if (pdfFiles.length === 0) {
         alert('Please select at least one PDF file.');
