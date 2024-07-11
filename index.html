@@ -7,11 +7,26 @@
 </head>
 <body>
     <h1>TeX to PDF Converter</h1>
-    <form id="texForm">
-        <textarea id="texInput" rows="20" cols="80" placeholder="Enter your TeX code here"></textarea>
-        <br>
-        <button type="button" onclick="convertTexToPdf()">Convert to PDF</button>
-    </form>
+    <form action="https://www.overleaf.com/docs" method="post" target="_blank">
+<textarea rows="8" cols="60" name="snip">
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+
+\begin{document}
+\noindent
+Bla bla bla bla :
+\begin{align*}
+A &amp;= B + C - D \\ \\
+%phantom
+&amp;\phantom{= B + C \;}
+%phantom
++ D - E \\ \\
+&amp;= F + G - H.
+\end{align*}
+\end{document}
+</textarea>
+<input type="submit" value="Open in Overleaf">
+</form>
     <br>
     <iframe id="pdfOutput" width="600" height="800"></iframe>
     <script src="js/script.js"></script>
