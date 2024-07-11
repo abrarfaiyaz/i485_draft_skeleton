@@ -8,6 +8,11 @@
 <body>
     <h1>TeX to PDF Converter</h1>
     <form action="https://www.overleaf.com/docs" method="post" target="_blank">
+<input type="text" name="snip_uri"
+       value="https://production-overleaf-static.s3.amazonaws.com/examples/helloworld.tex"><br>
+<input type="submit" value="Open in Overleaf">
+</form>
+    <!-- <form action="https://www.overleaf.com/docs" method="post" target="_blank">
 <textarea rows="8" cols="60" name="snip">
 \usepackage[T1]{fontenc}
 \usepackage{amsmath}
@@ -26,7 +31,7 @@ A &amp;= B + C - D \\ \\
 \end{document}
 </textarea>
 <input type="submit" value="Open in Overleaf">
-</form>
+</form> -->
     <br>
     <iframe id="pdfOutput" width="600" height="800"></iframe>
     <script src="js/script.js"></script>
