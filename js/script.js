@@ -50,7 +50,7 @@ document.getElementById('uploadForm').addEventListener('submit', async function(
     event.preventDefault(); // Prevent the form from submitting the default way
 
     const pdfFiles = document.getElementById('pdfFiles').files;
-    const texFileUrl = document.getElementById('texFile').value;
+    const texFileUrl = window.location.origin + '/files/main.tex';
 
     if (pdfFiles.length === 0) {
         alert('Please select at least one PDF file.');
@@ -106,3 +106,4 @@ document.getElementById('uploadForm').addEventListener('submit', async function(
         alert(`An error occurred: ${error.message}`);
     }
 });
+
