@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,6 +9,27 @@
     <h1>TeX to PDF Converter</h1>
     <form id="uploadForm">
         <input type="file" id="fileInput" accept=".tex"><br><br>
+        <input type="submit" value="Upload and Open in Overleaf">
+    </form>
+    <script src="js/script.js"></script>
+</body>
+</html>
+ -->
+
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeX to PDF with Overleaf</title>
+</head>
+<body>
+    <h1>TeX to PDF Converter</h1>
+    <form id="uploadForm">
+        <label for="texFile">TeX File URL:</label><br>
+        <input type="text" id="texFile" value="https://github.com/abrarfaiyaz/i485_draft_skeleton/blob/main/files/main.tex" readonly><br><br>
+        <label for="pdfFiles">Select PDF attachments:</label><br>
+        <input type="file" id="pdfFiles" accept=".pdf" multiple><br><br>
         <input type="submit" value="Upload and Open in Overleaf">
     </form>
     <script src="js/script.js"></script>
