@@ -3,37 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TeX to PDF Converter</title>
+    <title>TeX to PDF with Overleaf</title>
 </head>
 <body>
     <h1>TeX to PDF Converter</h1>
-    <form action="https://www.overleaf.com/docs" method="post" target="_blank">
-<input type="text" name="snip_uri"
-       value="https://production-overleaf-static.s3.amazonaws.com/examples/helloworld.tex"><br>
-<input type="submit" value="Open in Overleaf">
-</form>
-    <!-- <form action="https://www.overleaf.com/docs" method="post" target="_blank">
-<textarea rows="8" cols="60" name="snip">
-\usepackage[T1]{fontenc}
-\usepackage{amsmath}
-
-\begin{document}
-\noindent
-Bla bla bla bla :
-\begin{align*}
-A &amp;= B + C - D \\ \\
-%phantom
-&amp;\phantom{= B + C \;}
-%phantom
-+ D - E \\ \\
-&amp;= F + G - H.
-\end{align*}
-\end{document}
-</textarea>
-<input type="submit" value="Open in Overleaf">
-</form> -->
-    <br>
-    <iframe id="pdfOutput" width="600" height="800"></iframe>
+    <form id="uploadForm">
+        <input type="file" id="fileInput" accept=".tex"><br><br>
+        <input type="submit" value="Upload and Open in Overleaf">
+    </form>
     <script src="js/script.js"></script>
 </body>
 </html>
