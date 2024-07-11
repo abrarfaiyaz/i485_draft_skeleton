@@ -6,6 +6,14 @@
 % time. See www.overleaf.com/learn for more info. Enjoy!
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Welcome to Overleaf --- just edit your LaTeX on the left,
+% and we'll compile it for you on the right. If you open the
+% 'Share' menu, you can invite other users to edit at the same
+% time. See www.overleaf.com/learn for more info. Enjoy!
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \documentclass{letter}
 \usepackage[utf8]{inputenc}
 \usepackage{geometry}
@@ -46,10 +54,10 @@
 %     \noindent\textbf{#1}%
 %     \par\nobreak\vspace{0.5em plus 0.2em minus 0.1em}%
 % }
-\date{July 01, 2024}
+\date{\today}
 
-\signature{\pApplicant \\615 University Park,\\Rochester, NY- 14620}
-\address{\pApplicant \\ 615 University Park,\\Rochester, NY- 14620}
+\signature{\pApplicant \\\dAddress\\\dCity, \dState - \dZip}
+\address{\pApplicant \\\dAddress,\\\dCity, \dState - \dZip}
 
 \begin{document}
 % \include{variables}
@@ -153,7 +161,7 @@ e-mail: \dEmail
 \vspace{2cm}
 \textbf{\pApplicant} \\
 \pAddress\\
-\pCity\\
+\pCity, \pState - \pZip\\
 Phone: \pPhone \\
 \pEmail \\
 \end{minipage}%
@@ -162,7 +170,7 @@ Phone: \pPhone \\
 \begin{flushright}
 \textbf{\dApplicant} \\
 \dAddress\\
-\dCity\\
+\dCity, \dState - \dZip\\
 Phone: \dPhone \\
 \dEmail\\
 \end{flushright}
