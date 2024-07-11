@@ -37,7 +37,6 @@ document.getElementById('uploadForm').addEventListener('submit', async function(
     try {
         // Create the variables TeX file with user input
         const variablesTex = `
-% Details Regarding Primary Applicant
 \\newcommand{\\pApplicant}{${pApplicant}}
 \\newcommand{\\pPhone}{${pPhone}}
 \\newcommand{\\pEmail}{${pEmail}}
@@ -48,8 +47,6 @@ document.getElementById('uploadForm').addEventListener('submit', async function(
 \\newcommand{\\Anum}{${Anum}}
 \\newcommand{\\priorityDate}{${priorityDate}}
 \\newcommand{\\ReceiptNumber}{${ReceiptNumber}}
-
-% Details Regarding Derivative Applicant
 \\newcommand{\\dApplicant}{${dApplicant}}
 \\newcommand{\\dPhone}{${dPhone}}
 \\newcommand{\\dEmail}{${dEmail}}
@@ -57,8 +54,6 @@ document.getElementById('uploadForm').addEventListener('submit', async function(
 \\newcommand{\\dCity}{${dCity}}
 \\newcommand{\\dState}{${dState}}
 \\newcommand{\\dZip}{${dZip}}
-
-% Details Regarding Recipient's Address
 \\newcommand{\\USCISATTN}{${USCISATTN}}
 \\newcommand{\\USCISPOBOX}{${USCISPOBOX}}
 \\newcommand{\\USCISCITY}{${USCISCITY}}
