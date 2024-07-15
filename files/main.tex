@@ -1,32 +1,15 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% Welcome to Overleaf --- just edit your LaTeX on the left,
-% and we'll compile it for you on the right. If you open the
-% 'Share' menu, you can invite other users to edit at the same
-% time. See www.overleaf.com/learn for more info. Enjoy!
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% Welcome to Overleaf --- just edit your LaTeX on the left,
-% and we'll compile it for you on the right. If you open the
-% 'Share' menu, you can invite other users to edit at the same
-% time. See www.overleaf.com/learn for more info. Enjoy!
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \documentclass{letter}
 \usepackage[utf8]{inputenc}
 \usepackage{geometry}
 \geometry{left=1in, right=1in, top=1in, bottom=1in}
-% \pagenumbering{gobble}
 \usepackage[hidelinks]{hyperref}
 \usepackage{enumitem}
 \usepackage{pdfpages}
 \usepackage{booktabs}
 \usepackage{enumitem}
-% \newcommand\addtoindex[2]{%
-%   \ifnum\AM@page=#2\relax\index{#1}\fi
-% }
+\usepackage{times}
+
 
 
 
@@ -49,11 +32,7 @@
 \newenvironment{pdf}[1]
 {\centerlabel{#1}}
 
-% \newcommand{\pseudosection}[1]{%
-%     \vspace{1em plus 0.5em minus 0.2em}%
-%     \noindent\textbf{#1}%
-%     \par\nobreak\vspace{0.5em plus 0.2em minus 0.1em}%
-% }
+
 \date{\today}
 
 \signature{\pApplicant \\\dAddress\\\dCity, \dState - \dZip}
@@ -86,44 +65,10 @@ for \textit{\pApplicant} (\Anum) \& \textit{\dApplicant} (Spouse) as nationals o
 
 I, \textbf{\pApplicant}, along with  my wife \textbf{\dApplicant} are submitting our application to Register Permanent Residence or Adjust Status (I-485) based on my approved NIW Employment-Based I-140, Immigration Petition for Alien Worker (\textbf{Priority Date \priorityDate} and \textbf{Receipt Number \ReceiptNumber}).\textbf{\dApplicant} is also applying for \textbf{Employment Authorization (Form I-765)} together with her adjustment of status application.
 
-% Please Note: I Self-Petitioned My Approved I-140 NIW Petition - Therefore, I-485 Supplement J Is Not Required. Supplement-J instruction is added to the supporting documents that shows my petition do not require filing Supplement-J form.
+
 
 The index of exhibits will guide you to principal and derivative applicant's list of documents submitted for both of our application. The documents of the Principal and Derviate Applicant is in separate packets for your convenience.
 
-% With this letter please find the following-
-% \begin{enumerate}
-%     \item Payment Money Order (\$1440), I-485 Application Fee 
-%     \item Two (2" x 2") Passport Photographs
-%     \item Completed \textbf{Form G-1145}, {(E-Notification of Apptication/Petition Acceptance)}
-%     \item Completed \textbf{Form I-485}
-% \end{enumerate}
-
-% Stated in the I485 instructions (page 21), "In general, if you are filing Form I-485 based on employment, you do not need to submit Form I-864, Affidavit of Support Under Section 213A of the Act."
-
-
-% Please accept my application to Adjustment of Status (I-485) based on my recently approved Immigrant Petition for Alien Workers (I-140) under National Interest Waiver with a priority date of October 25, 2021, Application for Employment Authorization (I-765), and Application for Travel Document (I-131). I am currently present in the United States on an F1 Student visa status. I have included form G-1450 for authorization for credit card transaction of \$1,225 which includes \$1,140 filing fee and \$85 biometric fee together.
-
-
-
-% I submitted supporting evidence for the \textbf{I-485} application in the following order:
-
-% \hspace{0.5cm}
-% \vspace{1cm}
-% \vfill{
-% \textit{Sincerely,}\\
-% \vspace{1.5cm}
-
-% \textbf{\pApplicant, PhD} \\
-% \textit{PostDoctoral Assoc. at Neurology,} \\
-% University of Rochester (School of Medicine \& Dentistry) \\
-% Phone: 585-355 9186 \\
-% E-mail: afaiyaz.tasin@outlook.com \\
-
-% \vspace{1.5cm}
-
-% \textbf{\dApplicant} \\
-% Phone: 585-202 9934 \\
-% E-mail: sayka.s.mim@gmail.com}
 \vspace{1.5cm}
 \textit{Sincerely,}
 
@@ -177,27 +122,10 @@ Phone: \dPhone \\
 \end{minipage}
 
 
-
+%%%% INCLUDE THE EVIDENCES %%%%%%%%
 \input{evidence_p_applicant}
 
 \input{evidences_d_applicant}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FOR MIM %%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-
-
-% \centerlabel{Exhibit-8\\ \large Marriage Certificate \& Nikahnama}
-% % Marriage Certificate
-% \phantomsection\label{exhibit12a}
-% \includepdf[pagecommand={\thispagestyle{plain}},pages=-,angle=0]{MarriageCertificate_2024.pdf}
-% \phantomsection\label{exhibit12b}
-% \includepdf[pagecommand={\thispagestyle{plain}},pages=-,angle=0]{Nikahnama_English.pdf}
-
-
-
 
 
 
