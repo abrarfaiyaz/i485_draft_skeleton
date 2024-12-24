@@ -1,11 +1,273 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Support for self-filing I-485 application: gather information, generate a cover letter and exhibit list.">
+  <meta name="keywords" content="I-485, USCIS, Immigration, Adjustment of Status, Green Card, Self-Filing, Overleaf">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Self-filing Support for I-485</title>
+  
+  <!-- Google tag (gtag.js) - Example Analytics Tag -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3VK7XNG7H8"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3VK7XNG7H8');
+  </script>
+  
+  <!-- (Optional) Style for basic layout and readability -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      line-height: 1.5;
+    }
+    header, main, footer {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 10px;
+    }
+    header h1, main h2 {
+      margin-top: 0;
+    }
+    form {
+      background-color: #f9f9f9;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+    input[type="text"],
+    input[type="email"] {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 15px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+    input[type="submit"] {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      padding: 10px 15px;
+      font-size: 1rem;
+    }
+    input[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+    .note {
+      font-size: 0.9rem;
+      color: #555;
+    }
+    .resources a {
+      text-decoration: none;
+      color: #007BFF;
+    }
+    .resources a:hover {
+      text-decoration: underline;
+    }
+    footer {
+      margin-top: 40px;
+      font-size: 0.85rem;
+      border-top: 1px solid #ddd;
+      padding-top: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Prepare Draft for I-485</h1>
+    <p><em>An informational guide to help you gather essential details for preparing your I-485 application package.</em></p>
+  </header>
+  
+  <main>
+    <!-- Section: Overview and Disclaimer -->
+    <section>
+      <h2>Overview</h2>
+      <p>
+        Form I-485, Application to Register Permanent Residence or Adjust Status, is a critical step in the U.S. immigration process. 
+        Properly completing and submitting this form, along with required evidence, can be time-consuming. 
+        This website aims to simplify the preparation of certain documents—specifically, a <strong>cover letter</strong> 
+        and <strong>exhibit list</strong>—to include in your I-485 package.
+      </p>
+      <p>
+        By filling in the details below and clicking “Submit,” you can generate a draft letter in PDF format 
+        (hosted on Overleaf) that outlines the items you’re including in your application package. 
+        We strongly recommend cross-checking the auto-generated list and attaching additional evidence 
+        pertinent to your specific situation.
+      </p>
+      <p class="note"><strong>Important Disclaimer:</strong> 
+        This tool is for guidance only and does not substitute legal advice. Always verify 
+        <a href="https://www.uscis.gov/" target="_blank" rel="noopener">USCIS official resources</a> 
+        or consult an immigration attorney for personalized assistance.
+      </p>
+    </section>
+
+    <!-- Section: Instructions -->
+    <section>
+      <h2>How to Use This Tool</h2>
+      <ol>
+        <li>Complete the form below, ensuring accuracy of all details.</li>
+        <li>Upon clicking “Submit,” you will be directed to sign in to your 
+          <a href="https://www.overleaf.com/" target="_blank" rel="noopener">Overleaf Account</a> to view/edit 
+          a generated LaTeX project. This project contains:
+          <ul>
+            <li>A draft I-485 cover letter addressing USCIS.</li>
+            <li>An exhibit list that organizes common supporting evidence.</li>
+          </ul>
+        </li>
+        <li>Review, edit, or add any missing information. Then compile the project into a PDF.</li>
+        <li>Print and place the PDF cover letter and exhibit list on top of your supporting documents 
+            in your I-485 application package.</li>
+      </ol>
+      <p class="note">
+        <strong>Tip:</strong> If you encounter a popup-blocking issue, 
+        please use Google Chrome or allow popups on your current browser.
+      </p>
+    </section>
+    
+    <!-- Section: Form to collect user data -->
+    <form id="uploadForm">
+      <h3>Primary Applicant Details</h3>
+      <label for="pApplicant">Full Name:</label>
+      <input type="text" id="pApplicant" name="pApplicant" required>
+
+      <label for="pPhone">Phone:</label>
+      <input type="text" id="pPhone" name="pPhone" required>
+
+      <label for="pEmail">Email:</label>
+      <input type="email" id="pEmail" name="pEmail" required>
+
+      <label for="pAddress">Address:</label>
+      <input type="text" id="pAddress" name="pAddress" required>
+
+      <label for="pCity">City:</label>
+      <input type="text" id="pCity" name="pCity" required>
+
+      <label for="pState">State:</label>
+      <input type="text" id="pState" name="pState" required>
+
+      <label for="pZip">ZIP Code:</label>
+      <input type="text" id="pZip" name="pZip" required>
+
+      <h3>Derivative Applicant Details</h3>
+      <label for="dApplicant">Full Name:</label>
+      <input type="text" id="dApplicant" name="dApplicant" required>
+
+      <label for="dPhone">Phone:</label>
+      <input type="text" id="dPhone" name="dPhone" required>
+
+      <label for="dEmail">Email:</label>
+      <input type="email" id="dEmail" name="dEmail" required>
+
+      <label for="dAddress">Address:</label>
+      <input type="text" id="dAddress" name="dAddress" required>
+
+      <label for="dCity">City:</label>
+      <input type="text" id="dCity" name="dCity" required>
+
+      <label for="dState">State:</label>
+      <input type="text" id="dState" name="dState" required>
+
+      <label for="dZip">ZIP Code:</label>
+      <input type="text" id="dZip" name="dZip" required>
+
+      <h3>Application Details</h3>
+      <label for="Anum">A Number:</label>
+      <input type="text" id="Anum" name="Anum" required>
+
+      <label for="priorityDate">Priority Date:</label>
+      <input type="text" id="priorityDate" name="priorityDate" required>
+
+      <label for="ReceiptNumber">Receipt Number:</label>
+      <input type="text" id="ReceiptNumber" name="ReceiptNumber" required>
+
+      <h3>USCIS Recipient Address <small>(Refer to “Where to File” below)</small></h3>
+      <label for="USCISATTN">USCIS ATTN:</label>
+      <input type="text" id="USCISATTN" name="USCISATTN" required>
+
+      <label for="USCISPOBOX">USCIS PO Box:</label>
+      <input type="text" id="USCISPOBOX" name="USCISPOBOX" required>
+
+      <label for="USCISCITY">City:</label>
+      <input type="text" id="USCISCITY" name="USCISCITY" required>
+
+      <label for="USCISSTATE">State:</label>
+      <input type="text" id="USCISSTATE" name="USCISSTATE" required>
+
+      <label for="USCISzip">ZIP Code:</label>
+      <input type="text" id="USCISzip" name="USCISzip" required>
+
+      <input type="submit" value="Submit">
+    </form>
+
+    <!-- Section: Resources -->
+    <section class="resources">
+      <h2>Resources & References</h2>
+      <p>
+        The following resources are official USCIS references that may help you better understand the 
+        filing requirements and process:
+      </p>
+      <ul>
+        <li>
+          <a href="https://www.uscis.gov/sites/default/files/document/forms/i-485instr.pdf" target="_blank" rel="noopener">
+            Instructions for I-485 filing
+          </a>
+        </li>
+        <li>
+          <a href="https://www.uscis.gov/forms/all-forms/direct-filing-addresses-for-form-i-485-application-to-register-permanent-residence-or-adjust-status" target="_blank" rel="noopener">
+            Where to File: I-485 with Pending/Approved I-140 or Concurrent Filing
+          </a>
+        </li>
+        <li>
+          <a href="https://www.uscis.gov/forms/filing-fees" target="_blank" rel="noopener">
+            Fee-related Information
+          </a>
+        </li>
+      </ul>
+    </section>
+  </main>
+  
+  <!-- Footer with additional info -->
+  <footer>
+    <p>
+      <strong>About This Website</strong><br>
+      Built in July 2024, this platform was created to help simplify the I-485 filing process by 
+      automating some of the documentation. If this website saved you time and was helpful, 
+      please consider supporting my work by 
+      <a href="https://www.paypal.me/abrarfaiyaz?locale.x=en_US" target="_blank" rel="noopener">
+        sponsoring a coffee
+      </a>. Your generosity is greatly appreciated!
+    </p>
+    <p>
+      Author: <a href="https://abrarfaiyaz.github.io/cv/" target="_blank" rel="noopener">Abrar Faiyaz</a>
+    </p>
+  </footer>
+
+  <!-- JavaScript for form submission and Overleaf integration -->
+  <script src="js/script.js"></script>
+</body>
+</html>
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Self-filing Support for I-485</title>
 </head>
-<!-- Google tag (gtag.js) -->
+// Google tag (gtag.js) 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-3VK7XNG7H8"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -121,195 +383,5 @@
     <script src="js/script.js"></script>
 </body>
 </html>
-
-
-
-<!-- WORKING CODE -->
-
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TeX to PDF Converter</title>
-</head>
-<body>
-    <h1>OverLeaf Cover Letter and Exhibition List for I-485</h1>
-    <form id="uploadForm">
-        <label for="pApplicant">Primary Applicant Name:</label>
-        <input type="text" id="pApplicant" name="pApplicant" required>
-        <br><br>
-        <label for="dApplicant">Derivative Applicant Name:</label>
-        <input type="text" id="dApplicant" name="dApplicant" required>
-        <br><br>
-        <label for="pPhone">Primary Applicant Phone:</label>
-        <input type="text" id="pPhone" name="pPhone" required>
-        <br><br>
-        <label for="dPhone">Derivative Applicant Phone:</label>
-        <input type="text" id="dPhone" name="dPhone" required>
-        <br><br>
-        <label for="pEmail">Primary Applicant Email:</label>
-        <input type="email" id="pEmail" name="pEmail" required>
-        <br><br>
-        <label for="dEmail">Derivative Applicant Email:</label>
-        <input type="email" id="dEmail" name="dEmail" required>
-        <br><br>
-        <label for="pAddress">Primary Applicant Address:</label>
-        <input type="text" id="pAddress" name="pAddress" required>
-        <br><br>
-        <label for="pCity">Primary Applicant City:</label>
-        <input type="text" id="pCity" name="pCity" required>
-        <br><br>
-        <label for="dAddress">Derivative Applicant Address:</label>
-        <input type="text" id="dAddress" name="dAddress" required>
-        <br><br>
-        <label for="dCity">Derivative Applicant City:</label>
-        <input type="text" id="dCity" name="dCity" required>
-        <br><br>
-        <label for="Anum">A Number:</label>
-        <input type="text" id="Anum" name="Anum" required>
-        <br><br>
-        <label for="priorityDate">Priority Date:</label>
-        <input type="text" id="priorityDate" name="priorityDate" required>
-        <br><br>
-        <label for="ReceiptNumber">Receipt Number:</label>
-        <input type="text" id="ReceiptNumber" name="ReceiptNumber" required>
-        <br><br>
-        <label for="USCISaddress">USCIS Address:</label>
-        <textarea id="USCISaddress" name="USCISaddress" required>U.S. Department of Homeland Security (USCIS)\\Attn: NFB\\PO Box 4115\\Carol Stream, IL 60197-4115</textarea>
-        <br><br>
-        <input type="submit" value="Submit">
-    </form>
-    <script src="js/script.js"></script>
-</body>
-</html> -->
-
-
-
-
-<!-- NOT WORKING CODE -->
-
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TeX to PDF Converter</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        h1 {
-            text-align: center;
-        }
-        form {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            background-color: #f9f9f9;
-        }
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-        }
-        input, textarea {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        input[type="submit"] {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-            padding: 10px;
-        }
-        input[type="submit"]:hover {
-            background-color: #45a049;
-        }
-    </style>
-</head>
-<body>
-    <h1>Upload TeX Files and Open in Overleaf</h1>
-    <form id="uploadForm">
-        <h2>Primary Applicant Details</h2>
-        <label for="pApplicant">Name:</label>
-        <input type="text" id="pApplicant" name="pApplicant" required>
-        
-        <label for="pPhone">Phone:</label>
-        <input type="text" id="pPhone" name="pPhone" required>
-        
-        <label for="pEmail">Email:</label>
-        <input type="email" id="pEmail" name="pEmail" required>
-        
-        <label for="pAddress">Address:</label>
-        <input type="text" id="pAddress" name="pAddress" required>
-        
-        <label for="pCity">City:</label>
-        <input type="text" id="pCity" name="pCity" required>
-        
-        <label for="pState">State:</label>
-        <input type="text" id="pState" name="pState" required>
-        
-        <label for="pZip">Zip:</label>
-        <input type="text" id="pZip" name="pZip" required>
-        
-        <label for="Anum">A Number:</label>
-        <input type="text" id="Anum" name="Anum" required>
-        
-        <label for="priorityDate">Priority Date:</label>
-        <input type="text" id="priorityDate" name="priorityDate" required>
-        
-        <label for="ReceiptNumber">Receipt Number:</label>
-        <input type="text" id="ReceiptNumber" name="ReceiptNumber" required>
-
-        <h2>Derivative Applicant Details</h2>
-        <label for="dApplicant">Name:</label>
-        <input type="text" id="dApplicant" name="dApplicant" required>
-        
-        <label for="dPhone">Phone:</label>
-        <input type="text" id="dPhone" name="dPhone" required>
-        
-        <label for="dEmail">Email:</label>
-        <input type="email" id="dEmail" name="dEmail" required>
-        
-        <label for="dAddress">Address:</label>
-        <input type="text" id="dAddress" name="dAddress" required>
-        
-        <label for="dCity">City:</label>
-        <input type="text" id="dCity" name="dCity" required>
-        
-        <label for="dState">State:</label>
-        <input type="text" id="dState" name="dState" required>
-        
-        <label for="dZip">Zip:</label>
-        <input type="text" id="dZip" name="dZip" required>
-
-        <h2>Recipient Address Details</h2>
-        <label for="USCISATTN">Attention:</label>
-        <input type="text" id="USCISATTN" name="USCISATTN" required>
-        
-        <label for="USCISPOBOX">PO Box:</label>
-        <input type="text" id="USCISPOBOX" name="USCISPOBOX" required>
-        
-        <label for="USCISCITY">City:</label>
-        <input type="text" id="USCISCITY" name="USCISCITY" required>
-        
-        <label for="USCISSTATE">State:</label>
-        <input type="text" id="USCISSTATE" name="USCISSTATE" required>
-        
-        <label for="USCISzip">Zip:</label>
-        <input type="text" id="USCISzip" name="USCISzip" required>
-        
-        <input type="submit" value="Submit">
-    </form>
-    <script src="js/script.js"></script>
-</body>
-</html>
  -->
+
