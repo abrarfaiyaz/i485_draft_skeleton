@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>i485 Draft Redirect</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ccc4b5, #9c9484, #efeeea);
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        /* Canvas for graph nodes animation */
+        #graphCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        /* Hazy glass container */
+        .redirect-container {
+            position: relative;
+            z-index: 2;
+            background: rgba(239, 238, 234, 0.15);
+            border-radius: 30px;
+            padding: clamp(20px, 5vw, 40px); /* Responsive padding */
+            backdrop-filter: blur(20px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(204, 196, 181, 0.4);
+            text-align: center;
+            color: #5a5345;
+            width: 90%; /* Flexible width */
+            max-width: 500px; /* Limit max size */
+            margin: 10px; /* Prevent edge sticking */
+        }
+
+        .redirect-message {
+            font-size: clamp(18px, 5vw, 24px); /* Responsive font size */
+            margin-bottom: clamp(10px, 3vw, 20px);
+            font-weight: bold;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Hazy glass button */
+        .glass-button {
+            background: rgba(204, 196, 181, 0.25);
+            border: 1px solid rgba(156, 148, 132, 0.5);
+            padding: clamp(10px, 2.5vw, 12px) clamp(20px, 5vw, 24px);
+            border-radius: 30px;
+            color: #5a5345;
+            font-size: clamp(14px, 4vw, 16px);
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .glass-button:hover {
+            background: rgba(204, 196, 181, 0.45);
+            transform: translateY(-2px);
+        }
+
+        /* Media query for smaller screens */
+        @media (max-width: 600px) {
+            .redirect-container {
+                padding: 15px;
+            }
+            .redirect-message {
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="graphCanvas"></canvas>
+    <div class="redirect-container">
+        <div class="redirect-message">Redirecting to Immigenius.us...</div>
+        <button class="glass-button" onclick="window.location.href='https://immigenius.us'">Go Now</button>
+    </div>
+
+    <script>
+        // Automatic redirect after 3 seconds
+        setTimeout(() => {
+            window.location.href = 'https://immigenius.us';
+        }, 3000);
+
+        // Graph nodes animation
+        const canvas = document.getElementById('graphCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+
+        class Node {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * (window.innerWidth < 600 ? 1 : 2); /* Slower on mobile */
+                this.vy = (Math.random() - 0.5) * (window.innerWidth < 600 ? 1 : 2);
+                this.radius = Math.random() * (window.innerWidth < 600 ? 3 : 4) + 1; /* Smaller on mobile */
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = '#9c9484';
+                ctx.fill();
+                ctx.strokeStyle = '#ccc4b5';
+                ctx.lineWidth = 1;
+                ctx.stroke();
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+            }
+        }
+
+        const nodes = Array(window.innerWidth < 600 ? 30 : 50).fill().map(() => new Node()); /* Fewer nodes on mobile */
+
+        function connectNodes() {
+            for (let i = 0; i < nodes.length; i++) {
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const dx = nodes[i].x - nodes[j].x;
+                    const dy = nodes[i].y - nodes[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    const maxDistance = window.innerWidth < 600 ? 80 : 120; /* Shorter range on mobile */
+
+                    if (distance < maxDistance) {
+                        ctx.beginPath();
+                        ctx.moveTo(nodes[i].x, nodes[i].y);
+                        ctx.lineTo(nodes[j].x, nodes[j].y);
+                        ctx.strokeStyle = `rgba(156, 148, 132, ${1 - distance / maxDistance})`;
+                        ctx.lineWidth = window.innerWidth < 600 ? 1.5 : 2;
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            nodes.forEach(node => {
+                node.update();
+                node.draw();
+            });
+            
+            connectNodes();
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        // Resize canvas and adjust nodes on window resize
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            nodes.forEach(node => {
+                node.x = Math.min(node.x, canvas.width);
+                node.y = Math.min(node.y, canvas.height);
+            });
+        });
+    </script>
+</body>
+</html>
