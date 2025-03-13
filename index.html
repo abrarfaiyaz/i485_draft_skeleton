@@ -1,4 +1,188 @@
+
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>i485 Draft Redirect</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ccc4b5, #9c9484, #efeeea);
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        /* Canvas for graph nodes animation */
+        #graphCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        /* Hazy glass container */
+        .redirect-container {
+            position: relative;
+            z-index: 2;
+            background: rgba(239, 238, 234, 0.15);
+            border-radius: 30px;
+            padding: clamp(20px, 5vw, 40px); /* Responsive padding */
+            backdrop-filter: blur(20px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(204, 196, 181, 0.4);
+            text-align: center;
+            color: #5a5345;
+            width: 90%; /* Flexible width */
+            max-width: 500px; /* Limit max size */
+            margin: 10px; /* Prevent edge sticking */
+        }
+
+        .redirect-message {
+            font-size: clamp(18px, 5vw, 24px); /* Responsive font size */
+            margin-bottom: clamp(10px, 3vw, 20px);
+            font-weight: bold;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Hazy glass button */
+        .glass-button {
+            background: rgba(204, 196, 181, 0.25);
+            border: 1px solid rgba(156, 148, 132, 0.5);
+            padding: clamp(10px, 2.5vw, 12px) clamp(20px, 5vw, 24px);
+            border-radius: 30px;
+            color: #5a5345;
+            font-size: clamp(14px, 4vw, 16px);
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .glass-button:hover {
+            background: rgba(204, 196, 181, 0.45);
+            transform: translateY(-2px);
+        }
+
+        /* Media query for smaller screens */
+        @media (max-width: 600px) {
+            .redirect-container {
+                padding: 15px;
+            }
+            .redirect-message {
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="graphCanvas"></canvas>
+    <div class="redirect-container">
+        <div class="redirect-message">Redirecting to Immigenius.us...</div>
+        <button class="glass-button" onclick="window.location.href='https://immigenius.us'">Go Now</button>
+    </div>
+
+    <script>
+        // Automatic redirect after 3 seconds
+        setTimeout(() => {
+            window.location.href = 'https://immigenius.us';
+        }, 3000);
+
+        // Graph nodes animation
+        const canvas = document.getElementById('graphCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+
+        class Node {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * (window.innerWidth < 600 ? 1 : 2); /* Slower on mobile */
+                this.vy = (Math.random() - 0.5) * (window.innerWidth < 600 ? 1 : 2);
+                this.radius = Math.random() * (window.innerWidth < 600 ? 3 : 4) + 1; /* Smaller on mobile */
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = '#9c9484';
+                ctx.fill();
+                ctx.strokeStyle = '#ccc4b5';
+                ctx.lineWidth = 1;
+                ctx.stroke();
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+            }
+        }
+
+        const nodes = Array(window.innerWidth < 600 ? 30 : 50).fill().map(() => new Node()); /* Fewer nodes on mobile */
+
+        function connectNodes() {
+            for (let i = 0; i < nodes.length; i++) {
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const dx = nodes[i].x - nodes[j].x;
+                    const dy = nodes[i].y - nodes[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    const maxDistance = window.innerWidth < 600 ? 80 : 120; /* Shorter range on mobile */
+
+                    if (distance < maxDistance) {
+                        ctx.beginPath();
+                        ctx.moveTo(nodes[i].x, nodes[i].y);
+                        ctx.lineTo(nodes[j].x, nodes[j].y);
+                        ctx.strokeStyle = `rgba(156, 148, 132, ${1 - distance / maxDistance})`;
+                        ctx.lineWidth = window.innerWidth < 600 ? 1.5 : 2;
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            nodes.forEach(node => {
+                node.update();
+                node.draw();
+            });
+            
+            connectNodes();
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        // Resize canvas and adjust nodes on window resize
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            nodes.forEach(node => {
+                node.x = Math.min(node.x, canvas.width);
+                node.y = Math.min(node.y, canvas.height);
+            });
+        });
+    </script>
+</body>
+</html>
+
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -7,7 +191,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Self-filing Support for I-485</title>
   
-  <!-- Google tag (gtag.js) - Example Analytics Tag -->
+  
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-3VK7XNG7H8"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -16,7 +200,7 @@
     gtag('config', 'G-3VK7XNG7H8');
   </script>
   
-  <!-- (Optional) Style for basic layout and readability -->
+  
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -118,7 +302,7 @@
   </header>
   
   <main>
-    <!-- Section: Overview and Disclaimer -->
+    
     <section>
       <h2>Overview</h2>
       <p>
@@ -140,7 +324,7 @@
       </p>
     </section>
 
-    <!-- Section: Instructions -->
+    
     <section>
       <h2>How to Use This Tool</h2>
       <ol>
@@ -163,7 +347,7 @@
       </p>
     </section>
     
-    <!-- Section: Form to collect user data -->
+    
     <form id="uploadForm">
       <h3>Primary Applicant Details</h3>
       <label for="pApplicant">Full Name:</label>
@@ -238,7 +422,7 @@
       <input type="submit" value="Generate (Allow Pop-Up)">
     </form>
 
-    <!-- Section: Resources -->
+    
     <section class="resources">
       <h2>Resources & References</h2>
       <p>
@@ -263,7 +447,7 @@
         </li>
       </ul>
     </section>
-    <!-- Survey Section -->
+    
 <section class="survey">
   <h2>We Value Your Feedback</h2>
   <p>
@@ -282,7 +466,7 @@
 </section>
   </main>
   
-  <!-- Footer with additional info -->
+  
   <footer>
     <p>
       <strong>About This Website</strong><br>
@@ -298,135 +482,9 @@
     </p>
   </footer>
 
-  <!-- JavaScript for form submission and Overleaf integration -->
+  
   <script src="js/script.js"></script>
 </body>
 </html>
 
-
-
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Self-filing Support for I-485</title>
-</head>
-// Google tag (gtag.js) 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-3VK7XNG7H8"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-3VK7XNG7H8');
-</script>
-<body>
-    <h1> Prepare Draft for I-485 </h1>
-    <h2> "Submit" button may not work due to pop-up block. Please use Chrome. </h2>
-    <p id="about">
-    <small>
-        <strong>Before you Begin</strong><br>
-        After filling in the information below and clicking "Submit", you'll be required to sign into your <a href="https://www.overleaf.com/">OverLeaf Account</a> to generate an automated letter in PDF format and a list of exhibit items required for the I-485 application.<br><br>
-        Please be advised that you are responsible for cross-checking the information in the PDF and including any other evidence required based on your personal profile.<br><br>
-        Hope this makes your life easier!<br>
-
-        (If facing technical error, try google chrome on phones, if on safari make sure pop up is allowed.)
-    </small>
-</p>
-    <form id="uploadForm">
-        <h3>Primary Applicant Details</h3>
-        <label for="pApplicant">Primary Applicant Name:</label>
-        <input type="text" id="pApplicant" name="pApplicant" required>
-        <br><br>
-        <label for="pPhone">Primary Applicant Phone:</label>
-        <input type="text" id="pPhone" name="pPhone" required>
-        <br><br>
-        <label for="pEmail">Primary Applicant Email:</label>
-        <input type="email" id="pEmail" name="pEmail" required>
-        <br><br>
-        <label for="pAddress">Primary Applicant Address:</label>
-        <input type="text" id="pAddress" name="pAddress" required>
-        <br><br>
-        <label for="pCity">Primary Applicant City:</label>
-        <input type="text" id="pCity" name="pCity" required>
-        <br><br>
-        <label for="pState">Primary Applicant State:</label>
-        <input type="text" id="pState" name="pState" required>
-        <br><br>
-        <label for="pZip">Primary Applicant ZIP:</label>
-        <input type="text" id="pZip" name="pZip" required>
-        <br><br>
-
-        <h3>Derivative Applicant Details</h3>
-        <label for="dApplicant">Derivative Applicant Name:</label>
-        <input type="text" id="dApplicant" name="dApplicant" required>
-        <br><br>
-        
-        <label for="dPhone">Derivative Applicant Phone:</label>
-        <input type="text" id="dPhone" name="dPhone" required>
-        <br><br>
-        
-        <label for="dEmail">Derivative Applicant Email:</label>
-        <input type="email" id="dEmail" name="dEmail" required>
-        <br><br>
-        
-        <label for="dAddress">Derivative Applicant Address:</label>
-        <input type="text" id="dAddress" name="dAddress" required>
-        <br><br>
-        <label for="dCity">Derivative Applicant City:</label>
-        <input type="text" id="dCity" name="dCity" required>
-        <br><br>
-        <label for="dState">Derivative Applicant State:</label>
-        <input type="text" id="dState" name="dState" required>
-        <br><br>
-        <label for="dZip">Derivative Applicant ZIP:</label>
-        <input type="text" id="dZip" name="dZip" required>
-        <br><br>
-
-        <h3> Application Details</h3>
-        <label for="Anum">A Number:</label>
-        <input type="text" id="Anum" name="Anum" required>
-        <br><br>
-        <label for="priorityDate">Priority Date:</label>
-        <input type="text" id="priorityDate" name="priorityDate" required>
-        <br><br>
-        <label for="ReceiptNumber">Receipt Number:</label>
-        <input type="text" id="ReceiptNumber" name="ReceiptNumber" required>
-        <br><br>
-        <h3> USCIS Recipient Address <small>(Can be found in Resource Link-2)</small></h3>
-        <label for="USCISATTN">USCIS ATTN:</label>
-        <input type="text" id="USCISATTN" name="USCISATTN" required>
-        <br><br>
-        <label for="USCISPOBOX">USCIS PO Box:</label>
-        <input type="text" id="USCISPOBOX" name="USCISPOBOX" required>
-        <br><br>
-        <label for="USCISCITY">USCIS City:</label>
-        <input type="text" id="USCISCITY" name="USCISCITY" required>
-        <br><br>
-        <label for="USCISSTATE">USCIS State:</label>
-        <input type="text" id="USCISSTATE" name="USCISSTATE" required>
-        <br><br>
-        <label for="USCISzip">USCIS ZIP:</label>
-        <input type="text" id="USCISzip" name="USCISzip" required>
-        <br><br>
-        <input type="submit" value="Submit">
-    </form>
-    <p id="resources">
-        <strong>Resources</strong><br>
-        1. <a href="https://www.uscis.gov/sites/default/files/document/forms/i-485instr.pdf" target="_blank">Instructions for I-485 filing</a><br>
-        2. <a href="https://www.uscis.gov/forms/all-forms/direct-filing-addresses-for-form-i-485-application-to-register-permanent-residence-or-adjust-status" target="_blank">Where to File - Either with Pending or Approved Form I-140 OR concurrently filing with Form I-140</a><br>
-        3. <a href="https://www.uscis.gov/forms/filing-fees" target="_blank">Fee related information</a><br>
-    </p>
-
-    <p id="about">
-    <strong>About The Website (built July, 2024)</strong><br>
-    Author: <a href="https://abrarfaiyaz.github.io/cv/" target="_blank">Abrar Faiyaz</a><br>
-    If this website saved you time and was helpful, please consider supporting my work by <a href="https://www.paypal.me/abrarfaiyaz?locale.x=en_US">sponsoring a coffee</a>. Your generosity is greatly appreciated!
-</p>
-
-    <script src="js/script.js"></script>
-</body>
-</html>
  -->
-
